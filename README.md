@@ -1,61 +1,80 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Tugas Individu PBKK Pertemuan 5
+- Nama : I Kadek Agus Ariesta Putra
+- NRP : 05111940000105
 
-## About Laravel
+## Spesifikasi Software
+Untuk kebutuhan *web server*,* server side scripting language*, dan *database server* saya menggunakan *software* berikut.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Laragon
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    - Version : Full
+    - Release : 4.0.16
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+        Dengan:
+    - Apache 2.4.46 VC 15
+    - PHP 7.4.16
+    - MySQL 5.7.24
 
-## Learning Laravel
+Kemudian untuk membuat template aplikasi laravel, saya memerlukan software berikut.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Composer
+    - Version : 2.0.12
+    
+        Dengan:
+    - PHP 7.4.16
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Langkah Instalasi
 
-## Laravel Sponsors
+1. Download [Composer](https://getcomposer.org/download/), lalu menginstallnya.
+2. Saat instalasi Composer, pilih versi PHP yang akan digunakan
+    ![Gambar](md_assets/composer_setup.png)
+3. Setelah instalasi selesai dilakukan, maka restart Windows untuk merelokasi ulang PATH pada Environment Variables.
+4. Untuk memastikan composer telah di install, buka powershell lalu jalankan:
+    ```ps
+    composer
+    ```
+    ![Gambar](md_assets/composer.png)
+5. Install requirement laravel
+    ```ps
+    composer global require "laravel/installer"
+    ```
+    ![Gambar](md_assets/composer_requirement.png)
+6. Lalu pada root directory laragon `\laragon\www\`. Jalankan *command* :
+    ```ps
+    laravel new pbkk-laravel-mysql
+    ```
+    ![Gambar](md_assets/composer_newlaravel.png)
+    Setelah selesai, maka akan ada folder baru bernama "pbkk-laravel-mysql" di rood directory laragon.
+7. Start laragon service, lalu menuju : http://laravel-pbkk-mysql.test . Maka tampilannya adalah sebagai berikut:
+    ![Gambar](md_assets/laravel_home.png)
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Konfigurasi Database
+1. Masuk ke http://laravel-pbkk-mysql.test/phpmyadmin dengan username `root` dan tanpa password.
+2. Lalu buat user baru:
+    ![Gambar](md_assets/phpmyadmin_createuser.png)
+    Otomatis akan terbuat database bernama `pbkk_ariesta`
+3. Lalu ubah file .env pada bagian dibawah
 
-### Premium Partners
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=pbkk_ariesta
+    DB_USERNAME=pbkk_ariesta
+    DB_PASSWORD=
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+4. Lalu lakukan migrasi dengan cara menjalankan command
+    ```ps
+    php artisan migrate
+    ```
+    ![Gambar](md_assets/artisan_migrate.png)
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Migrasi berhasil dilakukan. Tampilan pada database `pbkk_ariesta` adalah sebagai berikut:
+    ![Gambar](md_assets/phpmyadmin_pbkk_ariesta.png)
 
 ## License
 
